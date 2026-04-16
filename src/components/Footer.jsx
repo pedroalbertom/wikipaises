@@ -1,7 +1,7 @@
 export default function Header() {
     return (
         <header>
-            <h1>WikiPaíses Header</h1>
+            <h1>WikiPaíses Footer</h1>
         </header>
     )
 }
