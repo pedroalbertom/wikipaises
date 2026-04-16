@@ -8,6 +8,22 @@ export default function Home() {
     const [region, setRegion] = useState('');
     const [loading, setLoading] = useState(true);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const countriesPerPage = 12;
+
+    const indexOfLastCountry = currentPage * countriesPerPage;
+    const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+    const currentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+    const totalPages = Math.ceil(countries.length / countriesPerPage);
+
+    const handleNext = () => {
+        if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
+    };
+
+    const handlePrev = () => {
+        if (currentPage > 1) setCurrentPage(prev => prev - 1);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -21,6 +37,7 @@ export default function Home() {
                     response = await getAllCountries();
                 }
                 setCountries(response.data);
+                setCurrentPage(1);
             } catch (error) {
                 console.error("Erro ao carregar dados:", error);
                 setCountries([]);
@@ -70,19 +87,47 @@ export default function Home() {
             {loading ? (
                 <p>Carregando...</p>
             ) : (
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-                    gap: '20px'
-                }}>
-                    {countries.length > 0 ? (
-                        countries.slice(0, 10).map((country) => (
+                <>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+                        gap: '20px'
+                    }}>
+                        {currentCountries.map((country) => (
                             <Card key={country.cca3} country={country} />
-                        ))
-                    ) : (
-                        <p>Nenhum país encontrado.</p>
+                        ))}
+                    </div>
+
+                    {countries.length > countriesPerPage && (
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: '20px',
+                            marginTop: '40px'
+                        }}>
+                            <button
+                                onClick={handlePrev}
+                                disabled={currentPage === 1}
+                                style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', padding: '10px 20px' }}
+                            >
+                                ← PREVIOUS
+                            </button>
+
+                            <span style={{ fontWeight: 'bold' }}>
+                                Page {currentPage} of {totalPages}
+                            </span>
+
+                            <button
+                                onClick={handleNext}
+                                disabled={currentPage === totalPages}
+                                style={{ cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', padding: '10px 20px' }}
+                            >
+                                NEXT →
+                            </button>
+                        </div>
                     )}
-                </div>
+                </>
             )}
         </main>
     );
