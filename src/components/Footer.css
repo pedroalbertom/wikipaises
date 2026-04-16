@@ -1,8 +1,25 @@
 .main-footer {
     background-color: rgb(20, 35, 80);
     padding: 60px 10%;
-    margin-top: 80px;
+    margin-top: 30px;
     border-top: 1px solid #eee;
+}
+
+.footer-title {
+    font-family: 'Playfair Display', serif;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 15%;
+    gap: 10px;
+}
+
+.footer-logo h2,
+.footer-logo p {
+    margin: 0;
 }
 
 .footer-content {
@@ -10,26 +27,17 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    letter-spacing: 1px;
 }
 
 .footer-content h2 {
     color: #ffffff;
-    margin-top: 10px;
-    letter-spacing: 1px;
-}
-
-.footer-content h4 {
-    color: #ffffff;
-    margin-top: 17.5px;
-    letter-spacing: 1px;
 }
 
 .footer-content p {
     font-size: 0.7rem;
     color: #888;
-    margin-top: 10px;
-    letter-spacing: 1px;
 }
 
 .footer-links {

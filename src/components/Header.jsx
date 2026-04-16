@@ -6,7 +6,7 @@ export default function Header() {
         <header className="main-header">
             <div className="header-container">
                 <Link to="/" className="logo-link">
-                    <h1 className="atlas-title">WikiPaíses</h1>
+                    <h1 className="header-title">WikiPaíses</h1>
                 </Link>
 
                 <nav className="header-nav">

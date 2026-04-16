@@ -5,15 +5,14 @@
 }
 
 .home-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 40px;
 }
 
 .atlas-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: #1a1a1a;
+    font-size: 4rem;
+    margin: 0;
 }
 
 .atlas-subtitle {
