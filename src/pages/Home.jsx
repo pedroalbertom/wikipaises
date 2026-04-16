@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllCountries, getCountriesByName, getCountriesByRegion } from '../services/api';
 import Card from '../components/Card';
+import './Home.css';
 
 export default function Home() {
     const [countries, setCountries] = useState([]);
@@ -54,9 +55,15 @@ export default function Home() {
     }, [searchTerm, region]);
 
     return (
-        <main style={{ padding: '20px' }}>
-            <div style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
+        <main className='main-container'>
+            <header className="home-header">
+                <h2 className="atlas-title">Explore the Atlas</h2>
+                <p className="atlas-subtitle">A curated digital archive of sovereign nations and cultures</p>
+            </header>
+
+            <div className='search-container'>
                 <input
+                    className='search-input'
                     type="text"
                     placeholder="Search by nation, capital..."
                     value={searchTerm}
@@ -64,16 +71,15 @@ export default function Home() {
                         setSearchTerm(e.target.value);
                         setRegion('');
                     }}
-                    style={{ padding: '10px', flex: 1 }}
                 />
 
                 <select
+                    className='search-select'
                     value={region}
                     onChange={(e) => {
                         setRegion(e.target.value);
                         setSearchTerm('');
                     }}
-                    style={{ padding: '10px' }}
                 >
                     <option value="">All Continents</option>
                     <option value="africa">Africa</option>
@@ -85,43 +91,33 @@ export default function Home() {
             </div>
 
             {loading ? (
-                <p>Carregando...</p>
+                <p style={{ textAlign: 'center' }}>Carregando...</p>
             ) : (
                 <>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-                        gap: '20px'
-                    }}>
+                    <div className='countries-grid'>
                         {currentCountries.map((country) => (
                             <Card key={country.cca3} country={country} />
                         ))}
                     </div>
 
                     {countries.length > countriesPerPage && (
-                        <div style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            gap: '20px',
-                            marginTop: '40px'
-                        }}>
+                        <div className="pagination-container">
                             <button
+                                className="pagination-button"
                                 onClick={handlePrev}
                                 disabled={currentPage === 1}
-                                style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', padding: '10px 20px' }}
                             >
                                 ← PREVIOUS
                             </button>
 
-                            <span style={{ fontWeight: 'bold' }}>
+                            <span className="page-indicator">
                                 Page {currentPage} of {totalPages}
                             </span>
 
                             <button
+                                className="pagination-button"
                                 onClick={handleNext}
                                 disabled={currentPage === totalPages}
-                                style={{ cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', padding: '10px 20px' }}
                             >
                                 NEXT →
                             </button>

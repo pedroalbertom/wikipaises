@@ -1,0 +1,44 @@
+.main-header {
+    background: white;
+    padding: 1rem 5%;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+    color: #666;
+}
+
+.header-nav span {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .header-nav {
+        display: none;
+    }
+}
