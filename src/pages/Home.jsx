@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllCountries } from '../services/api';
+import Card from '../components/Card';
 
 export default function Home() {
     const [countries, setCountries] = useState([]);
@@ -32,17 +33,7 @@ export default function Home() {
                 gap: '20px'
             }}>
                 {countries.slice(0, 10).map((country) => (
-                    <div key={country.cca3} style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '10px' }}>
-                        <img
-                            src={country.flags.svg}
-                            alt={country.name.common}
-                            style={{ width: '100%', height: '150px', objectFit: 'cover' }}
-                        />
-                        <h3>{country.name.common}</h3>
-                        <p><strong>Capital:</strong> {country.capital || "N/A"}</p>
-                        <p><strong>Região:</strong> {country.region}</p>
-                        <p><strong>População:</strong> {country.population.toLocaleString()}</p>
-                    </div>
+                    <Card key={country.cca3} country={country} />
                 ))}
             </div>
         </main>
