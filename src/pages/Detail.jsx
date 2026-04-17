@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getCountryByCode } from '../services/api';
+import './Detail.css'
 
 export default function Detail() {
     const { code } = useParams();
@@ -26,22 +27,29 @@ export default function Detail() {
         Object.values(country.currencies).map(c => `${c.name} (${c.symbol})`).join(', ') : 'N/A';
 
     return (
-        <div style={{ padding: '40px' }}>
+        <div className='main-container'>
             <Link to="/">
-                <button style={{ marginBottom: '20px', cursor: 'pointer' }}>← Voltar para a lista</button>
+                <button className='button'>← Voltar para a lista</button>
             </Link>
 
-            <div style={{ display: 'flex', gap: '40px', alignItems: 'start' }}>
+            <div className='country'>
                 <img src={country.flags.svg} alt={country.name.common} style={{ width: '400px', borderRadius: '8px' }} />
+                <h1>{country.name.official}</h1>
+                <p><strong>{country.name.common}</strong></p>
+                <div className='info-wrapper'>
+                    <div className='info-column'>
+                        <p><strong>Capital:</strong> {country.capital}</p>
+                        <p><strong>Continente:</strong> {country.region}</p>
+                        <p><strong>Sub-região:</strong> {country.subregion}</p>
+                        <p><strong>Área:</strong> {country.area.toLocaleString()} km²</p>
+                    </div>
 
-                <div>
-                    <h1>{country.name.official}</h1>
-                    <p><strong>Nome Comum:</strong> {country.name.common}</p>
-                    <p><strong>Região:</strong> {country.region} ({country.subregion})</p>
-                    <p><strong>Área:</strong> {country.area.toLocaleString()} km²</p>
-                    <p><strong>Idiomas:</strong> {languages}</p>
-                    <p><strong>Moedas:</strong> {currencies}</p>
-                    <p><strong>Código (cca3):</strong> {country.cca3}</p>
+                    <div className='info-column'>
+                        <p><strong>População:</strong> {country.population.toLocaleString()}</p>
+                        <p><strong>Idiomas:</strong> {languages}</p>
+                        <p><strong>Moedas:</strong> {currencies}</p>
+                        <p><strong>Código (cca3):</strong> {country.cca3}</p>
+                    </div>
                 </div>
             </div>
         </div>

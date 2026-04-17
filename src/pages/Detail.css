@@ -1,0 +1,37 @@
+.main-container {
+    padding: 40px
+}
+
+.button {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.country {
+    gap: 40px;
+    align-items: center;
+}
+
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.info-column {
+    flex: 1;
+}
+
+.info-column p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .info-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
